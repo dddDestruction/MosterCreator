@@ -5,11 +5,17 @@ import com.google.android.material.snackbar.Snackbar
 import androidx.appcompat.app.AppCompatActivity
 import android.view.Menu
 import android.view.MenuItem
+import androidx.recyclerview.widget.LinearLayoutManager
+import androidx.recyclerview.widget.RecyclerView
 import cl.desafiolatam.monstercreator.R
+import cl.desafiolatam.monstercreator.model.Monster
+import cl.desafiolatam.monstercreator.model.MonsterAttributes
 
 import kotlinx.android.synthetic.main.activity_main.*
 
 class MainActivity : AppCompatActivity() {
+
+    var lista: List<Monster> = listOf(Monster(MonsterAttributes(), 100, "cholo", R.drawable.asset02))
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -20,6 +26,14 @@ class MainActivity : AppCompatActivity() {
             Snackbar.make(view, "Replace with your own action", Snackbar.LENGTH_LONG)
                 .setAction("Action", null).show()
         }
+        crearRecycler()
+    }
+
+    fun crearRecycler(){
+        val recycler = findViewById<RecyclerView>(R.id.recyclerMonstruosCreados)
+        val adapter = AllMonstersAdapter(lista)
+        recycler.layoutManager = LinearLayoutManager(applicationContext)
+        recycler.adapter = adapter
     }
 
     override fun onCreateOptionsMenu(menu: Menu): Boolean {
