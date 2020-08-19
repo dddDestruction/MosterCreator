@@ -2,6 +2,7 @@ package cl.desafiolatam.monstercreator.view.allMonsters
 
 import android.content.Intent
 import android.os.Bundle
+import android.util.Log
 import com.google.android.material.snackbar.Snackbar
 import androidx.appcompat.app.AppCompatActivity
 import android.view.Menu
@@ -14,6 +15,7 @@ import androidx.recyclerview.widget.RecyclerView
 import cl.desafiolatam.monstercreator.R
 import cl.desafiolatam.monstercreator.model.Monster
 import cl.desafiolatam.monstercreator.model.MonsterAttributes
+import cl.desafiolatam.monstercreator.view.monster.CreateMonsters
 import cl.desafiolatam.monstercreator.view.monster.MonsterCreatorActivity
 import cl.desafiolatam.monstercreator.viewmodel.AllMonsterViewModel
 
@@ -33,9 +35,10 @@ class MainActivity : AppCompatActivity() {
             startActivity(intent)
         }
 
-        val model = AllMonsterViewModel(application)
-        model.getMonsters().observe(this, Observer<List<Monster>>{ monsters ->
+        val model = ViewModelProvider(this).get(AllMonsterViewModel::class.java)
+        model.allMonsters.observe(this, Observer<List<Monster>>{ monsters ->
             lista = monsters
+            Log.d("AAA", lista.toString())
             crearRecycler()
         })
     }

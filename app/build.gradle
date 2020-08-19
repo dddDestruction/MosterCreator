@@ -8,6 +8,9 @@ apply plugin: 'kotlin-kapt'
 
 android {
     compileSdkVersion 29
+    dataBinding {
+        enabled = true
+    }
     defaultConfig {
         applicationId "cl.desafiolatam.monstercreator"
         minSdkVersion 23
@@ -50,6 +53,7 @@ dependencies {
     kapt "androidx.lifecycle:lifecycle-compiler:$rootProject.archLifecycleVersion"
     androidTestImplementation "androidx.arch.core:core-testing:$rootProject.androidxArchVersion"
 
+    kapt "com.android.databinding:compiler:$gradle_version"
     // ViewModel Kotlin support
     implementation "androidx.lifecycle:lifecycle-viewmodel-ktx:$rootProject.archLifecycleVersion"
 
